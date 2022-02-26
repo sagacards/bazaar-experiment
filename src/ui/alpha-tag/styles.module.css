@@ -1,0 +1,20 @@
+.root {
+    position: relative;
+}
+
+.tag {
+    position: absolute;
+    top: -.75em;
+    right: 2.5em;
+
+    padding: .25em .5em;
+
+    background-color: var(--black);
+    border-radius: 5px;
+    box-shadow: 0 0 0 1px var(--white);
+
+    font-size: .7em;
+    text-transform: uppercase;
+
+    transform: rotate(-2deg);
+}

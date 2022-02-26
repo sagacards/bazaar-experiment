@@ -1,0 +1,124 @@
+.root {
+    border-radius: 10px;
+    box-shadow: 0 0 0 1px var(--white-black-black);
+    overflow: hidden;
+}
+
+.stage, .static, .animated {
+    width: 300px;
+    height: 300px;
+}
+
+.stage {
+    position: relative;
+}
+
+.static, .animated {
+    position: absolute;
+    z-index: 2;
+}
+
+.static {
+    animation: fadein 500ms linear;
+}
+
+.animated {
+    z-index: 3;
+    opacity: 0;
+    transition: opacity 250ms linear;
+}
+
+.animatedPlay {
+    opacity: 1;
+}
+
+.loader {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loaderHover {
+    z-index: 4;
+    width: 50px;
+    height: 50px;
+    top: 0;
+    right: 0;
+    transform: scale(.5);
+}
+
+.meta {
+    position: relative;
+    z-index: 10;
+
+    box-shadow: 0 0 0 1px var(--white-black-black);
+
+    display: flex;
+    flex-direction: column;
+    gap: .5em;
+    padding: .5em;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5em;
+}
+
+.ico {
+    width: 40px;
+    height: 40px;
+}
+
+.title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: .5em;
+}
+
+.mint {
+    font-size: 1.2em;
+}
+
+.collection {
+    color: var(--white-white-black);
+    font-size: .75em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.actions {
+    padding: .5em;
+}
+
+.divider {
+    height: 2px;
+    width: 100%;
+    background: var(--white-black-black);
+}
+
+.price {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .5em;
+}
+
+.priceLabel {
+    color: var(--white-white-black);
+    font-size: .8em;
+}
+
+.priceAmount {
+
+}
+
+@keyframes fadein {
+    from { opacity: 0 }
+    to { opacity: 1 }
+}
