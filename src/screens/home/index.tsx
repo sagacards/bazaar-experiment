@@ -20,7 +20,7 @@ export default function HomeScreen () {
         offset: {
             value: offset,
             min: 0,
-            max: 100, //listings.length,
+            max: listings.length,
             step: 1,
             onChange: val => {
                 if (val > listings.length - count) {
@@ -38,15 +38,6 @@ export default function HomeScreen () {
             onChange: setCount,
         },
     });
-
-    // Add some fake listings
-    React.useEffect(() => {
-        const listings : Listing[] = [];
-        for (let id = 100; id > 0; id--) {
-            listings.push({ id });
-        }
-        setListings(listings);
-    }, []);
 
     // Pagination
     const items = listings.slice(offset, offset + count);
