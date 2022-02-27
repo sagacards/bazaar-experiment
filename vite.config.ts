@@ -13,8 +13,10 @@ export default defineConfig({
     esbuildOptions: {
       plugins: [
         NodeGlobalsPolyfillPlugin({
-          buffer: true
-        }),
+          process: true,
+          buffer: true,
+          define: { 'process.env.NODE_ENV': '"production"' }, // https://github.com/evanw/esbuild/issues/660
+      }),
       ]
     }
   }
