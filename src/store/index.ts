@@ -55,13 +55,14 @@ const useStore = create<Store>((set, get) => ({
         // Create a default agent
         const defaultAgent = new HttpAgent({ host: 'https://boundary.ic0.app/' });
 
+        // Get ICP to USD exchange rate
         const cycles : any = await Actor.createActor(CyclesDID, {
             agent: defaultAgent,
             canisterId: 'rkp4c-7iaaa-aaaaa-aaaca-cai',
         }).get_icp_xdr_conversion_rate();
         const xdr = await fetch("https://free.currconv.com/api/v7/convert?q=XDR_USD&compact=ultra&apiKey=df6440fc0578491bb13eb2088c4f60c7").then(r => r.json());
 
-        const icpToUSD = Number(cycles.data.xdr_permyriad_per_icp/10000n)*(xdr.hasOwnProperty("XDR_USD") ? xdr.XDR_USD : 1.4023);
+        const icpToUSD = Number(cycles.data.xdr_permyriad_per_icp) / 10000 * (xdr.hasOwnProperty("XDR_USD") ? xdr.XDR_USD : 1.4023);
 
         // Get NFT canisters
         const dab = (await getAllNFTS()).filter(x => SagaCanisters.includes(x.principal_id.toText()));
