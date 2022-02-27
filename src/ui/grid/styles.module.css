@@ -5,4 +5,11 @@
     justify-content: flex-start;
     gap: 2em;
     padding: 2em;
+    box-sizing: border-box;
+}
+
+.empty {
+    justify-content: center;
+    width: 100%;
+    height: 100%;
 }

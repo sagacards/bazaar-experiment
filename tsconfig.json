@@ -21,6 +21,7 @@
       "ui/*" : ["src/ui/*"],
       "screens/*" : ["src/screens/*"],
       "store/*" : ["src/store/*"],
+      "util/*" : ["src/util/*"],
     },
     "types": []
   },

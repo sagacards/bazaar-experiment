@@ -5,9 +5,11 @@
 }
 
 .side {
+    width: 300px;
     padding: 4em;
 }
 
 .main {
     overflow-y: auto;
+    width: 100%;
 }

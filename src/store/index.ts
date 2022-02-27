@@ -7,8 +7,8 @@ import NFT from '@psychedelic/dab-js/dist/standard_wrappers/nft_standards/defaul
 // TODO: This should be a DAO maintained directory of Tarot NFTs.
 const SagaCanisters = [
     "nges7-giaaa-aaaaj-qaiya-cai",
-    "cwu5z-wyaaa-aaaaj-qaoaq-cai",
     "6e6eb-piaaa-aaaaj-qal6a-cai",
+    "cwu5z-wyaaa-aaaaj-qaoaq-cai",
 ];
 
 // Create some fake listings.

@@ -60,7 +60,7 @@ export default function NFTPreview (props : Props) {
             <div className={Styles.actions}>
                 <div className={Styles.price}>
                     <div className={Styles.priceLabel}>Price</div>
-                    <div className={Styles.priceAmount}>{Math.round(props.listing.price, 2)} ICP</div>
+                    <div className={Styles.priceAmount}>{props.listing.price.toFixed(2)} ICP</div>
                 </div>
             </div>
         </div>
