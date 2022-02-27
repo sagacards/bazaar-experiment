@@ -1,7 +1,9 @@
 import create from 'zustand'
 import { getAllNFTS, DABCollection, getNFTActor } from '@psychedelic/dab-js'
-import { HttpAgent } from '@dfinity/agent';
+import { Actor, HttpAgent } from '@dfinity/agent';
 import NFT from '@psychedelic/dab-js/dist/standard_wrappers/nft_standards/default';
+// @ts-ignore
+import CyclesDID from 'did/cycles.did.js';
 
 // We have our own list of canisters for this marketplace!
 // TODO: This should be a DAO maintained directory of Tarot NFTs.
@@ -31,6 +33,7 @@ interface Store {
     status: 'uninitialized' | 'initializing' | 'initialized';
 
     defaultAgent?: HttpAgent;
+    icpToUSD?: number;
 
     dab : DABCollection[];
     dabActors : { [key : string] : NFT };
@@ -50,13 +53,27 @@ const useStore = create<Store>((set, get) => ({
         set({ status: 'initializing' });
 
         // Create a default agent
-        const defaultAgent = new HttpAgent();
+        const defaultAgent = new HttpAgent({ host: 'https://boundary.ic0.app/' });
+
+        const cycles : any = await Actor.createActor(CyclesDID, {
+            agent: defaultAgent,
+            canisterId: 'rkp4c-7iaaa-aaaaa-aaaca-cai',
+        }).get_icp_xdr_conversion_rate();
+        const xdr = await fetch("https://free.currconv.com/api/v7/convert?q=XDR_USD&compact=ultra&apiKey=df6440fc0578491bb13eb2088c4f60c7").then(r => r.json());
+
+        const icpToUSD = Number(cycles.data.xdr_permyriad_per_icp/10000n)*(xdr.hasOwnProperty("XDR_USD") ? xdr.XDR_USD : 1.4023);
 
         // Get NFT canisters
         const dab = (await getAllNFTS()).filter(x => SagaCanisters.includes(x.principal_id.toText()));
         // @ts-ignore: dfinity package mismatch :(
         const dabActors = dab.reduce((agg, x) => ({ ...agg, [x.principal_id.toText()] : getNFTActor({ canisterId: x.principal_id.toText(), standard: x.standard, agent: defaultAgent }) }), {});
-        set({ dab, status: 'initialized', defaultAgent, dabActors });
+        set({
+            dab,
+            dabActors,
+            defaultAgent,
+            icpToUSD,
+            status: 'initialized',
+        });
     },
 
     // Known canisters.

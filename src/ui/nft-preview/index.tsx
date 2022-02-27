@@ -10,7 +10,7 @@ interface Props {
 export default function NFTPreview (props : Props) {
 
     // App store.
-    const { dab } = useStore();
+    const { dab, icpToUSD } = useStore();
 
     // Component state
     const [play, setPlay] = React.useState<boolean>(false);
@@ -58,6 +58,7 @@ export default function NFTPreview (props : Props) {
             </div>
             <div className={Styles.divider} />
             <div className={Styles.actions}>
+                {icpToUSD && <div className={Styles.usd}>${(props.listing.price * icpToUSD).toFixed(2)} USD</div>}
                 <div className={Styles.price}>
                     <div className={Styles.priceLabel}>Price</div>
                     <div className={Styles.priceAmount}>{props.listing.price.toFixed(2)} ICP</div>

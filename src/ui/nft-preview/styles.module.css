@@ -94,6 +94,9 @@
 }
 
 .actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: .5em;
 }
 
@@ -115,8 +118,9 @@
     font-size: .8em;
 }
 
-.priceAmount {
-
+.usd {
+    color: var(--white-white-black);
+    font-size: .8em;
 }
 
 @keyframes fadein {
