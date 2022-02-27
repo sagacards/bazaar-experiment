@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import NodeGlobalsPolyfillPlugin from '@esbuild-plugins/node-globals-polyfill'
-import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
+import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,19 +14,12 @@ export default defineConfig({
     esbuildOptions: {
       plugins: [
         NodeGlobalsPolyfillPlugin({
-          buffer: true,
-          define: { 'process.env.NODE_ENV': '"production"' }, // https://github.com/evanw/esbuild/issues/660
-      }),
+            process: true,
+            buffer: true,
+            define: { 'process.env.NODE_ENV': '"production"' }, // https://github.com/evanw/esbuild/issues/660
+        }),
+        NodeModulesPolyfillPlugin()
       ]
     }
-  },
-  build: {
-    rollupOptions: {
-        plugins: [
-            // Enable rollup polyfills plugin
-            // used during production bundling
-            rollupNodePolyFill()
-        ]
-    }
-}
+  }
 })
